@@ -132,6 +132,6 @@ app.get("/redirect", async (req, res) => {
   <div>`);
 });
 
-app.listen(3001, async () => {
-  console.log(`Listening on [${3001}]...`);
+app.listen(process.env.PORT, async () => {
+  console.log(`Listening on [${process.env.PORT}]...`);
 });
