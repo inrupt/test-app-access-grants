@@ -1,0 +1,26 @@
+{
+    "name": "test-app",
+    "version": "0.0.1",
+    "description": "tbd",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js"
+    },
+    "dependencies": {
+      "express": "^4.17.3",
+      "@inrupt/solid-client-authn-node": "^1.11.2",
+      "@inrupt/solid-client-access-grants": "^0.4.1",
+      "dotenv-flow": "^3.2.0"
+    },
+    "engines": {
+      "node": "12.x"
+    },
+    "repository": {
+      "url": "tbd"
+    },
+    "license": "MIT",
+    "keywords": [
+      "node",
+      "express"
+    ]
+  }
