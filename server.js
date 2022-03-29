@@ -55,7 +55,7 @@ app.use(express.urlencoded({ extended: true }));
 // This is the endpoint our NodeJS demo app listens on to receive incoming login
 const redirectUrl = new URL("/redirect", process.env.APP_URL);
 const REDIRECT_URL = redirectUrl.href;
-const expirationDate = new Date(Date.now() + 10 * 6000);
+const expirationDate = new Date(Date.now() + 30 * 6000);
 
 app.get("/", async (req, res) => {
   res.send(
