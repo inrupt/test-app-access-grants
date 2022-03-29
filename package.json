@@ -4,23 +4,24 @@
     "description": "tbd",
     "main": "server.js",
     "scripts": {
-      "start": "node server.js"
+        "start": "node server.js"
     },
     "dependencies": {
-      "express": "^4.17.3",
-      "@inrupt/solid-client-authn-node": "^1.11.2",
-      "@inrupt/solid-client-access-grants": "^0.4.1",
-      "dotenv-flow": "^3.2.0"
+        "@inrupt/solid-client-access-grants": "^0.4.1",
+        "@inrupt/solid-client-authn-node": "^1.11.2",
+        "buffer": "^6.0.3",
+        "dotenv-flow": "^3.2.0",
+        "express": "^4.17.3"
     },
     "engines": {
-      "node": "12.x"
+        "node": "12.x"
     },
     "repository": {
-      "url": "tbd"
+        "url": "tbd"
     },
     "license": "MIT",
     "keywords": [
-      "node",
-      "express"
+        "node",
+        "express"
     ]
-  }
+}

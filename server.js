@@ -20,6 +20,19 @@
  */
 
 /* eslint-disable no-console */
+global.Buffer = global.Buffer || require('buffer').Buffer;
+
+if (typeof btoa === 'undefined') {
+  global.btoa = function (str) {
+    return Buffer.from(str, 'binary').toString('base64');
+  };
+}
+
+if (typeof atob === 'undefined') {
+  global.atob = function (b64Encoded) {
+    return new Buffer.from(b64Encoded, 'base64').toString('binary');
+  };
+}
 
 const { Session } = require("@inrupt/solid-client-authn-node");
 const { config } = require("dotenv-flow");
