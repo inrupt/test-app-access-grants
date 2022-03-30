@@ -1,0 +1,39 @@
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css"
+/>
+<div class="container-fluid mt-5">
+  <form action="/request" , method="post">
+    <div class="form-group">
+      <label for="resource">
+        Enter the URL for a resource in your pod:
+        <input
+          class="form-control"
+          type="url"
+          name="resource"
+          id="resource"
+          required
+        />
+      </label>
+    </div>
+    <div class="form-group">
+      <label for="owner">
+        Enter your WebID:
+        <input
+          class="form-control"
+          type="url"
+          name="owner"
+          id="owner"
+          required
+        />
+      </label>
+    </div>
+    <div>
+      <input class="btn btn-primary" type="submit" value="Request Access" />
+    </div>
+    <span class="container-fluid mt-5">
+      <p>Access will be granted until <%- expirationDate %>.</p>
+      <p>Note: this demo works best when requesting access to text files.</p>
+    </span>
+  </form>
+</div>

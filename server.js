@@ -20,17 +20,17 @@
  */
 
 /* eslint-disable no-console */
-global.Buffer = global.Buffer || require('buffer').Buffer;
+global.Buffer = global.Buffer || require("buffer").Buffer;
 
-if (typeof btoa === 'undefined') {
+if (typeof btoa === "undefined") {
   global.btoa = function (str) {
-    return Buffer.from(str, 'binary').toString('base64');
+    return Buffer.from(str, "binary").toString("base64");
   };
 }
 
-if (typeof atob === 'undefined') {
+if (typeof atob === "undefined") {
   global.atob = function (b64Encoded) {
-    return new Buffer.from(b64Encoded, 'base64').toString('binary');
+    return new Buffer.from(b64Encoded, "base64").toString("binary");
   };
 }
 
@@ -49,6 +49,7 @@ const {
 config();
 
 const app = express();
+app.set("view engine", "ejs");
 // Support parsing application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
@@ -58,26 +59,7 @@ const REDIRECT_URL = redirectUrl.href;
 const expirationDate = new Date(Date.now() + 180 * 6000);
 
 app.get("/", async (req, res) => {
-  res.send(
-    `<form action="/request", method="post">
-      <div>
-        <label for="resource">
-          Enter the URL for a resource in your pod:
-          <input type="url" name="resource" id="resource" required>
-        </label>
-      </div>
-      <div>
-        <label for="owner">
-          Enter your WebID:
-          <input type="url" name="owner" id="owner" required>
-        </label>
-      </div>
-      <div>
-        <input type="submit" value="Request Access">
-      </div>
-      <p>Access will be granted until ${expirationDate}</p>
-    </form>`
-  );
+  res.render("index", { expirationDate });
 });
 
 app.post("/request", async (req, res) => {
@@ -136,13 +118,7 @@ app.get("/redirect", async (req, res) => {
   });
   const fileContent = await file.text();
 
-  res.send(`<div>
-    <p>Redirected with access grant: </p>
-    <pre>${JSON.stringify(fullVc)}</pre>
-    <hr/>
-    <p>Fetched file content: </p>
-    <pre>${fileContent}</pre>
-  <div>`);
+  res.render("success", { fullVc: JSON.stringify(fullVc), fileContent });
 });
 
 app.listen(process.env.PORT, async () => {
