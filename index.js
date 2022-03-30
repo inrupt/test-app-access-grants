@@ -93,7 +93,7 @@ app.post("/request", async (req, res) => {
       res.redirect(url);
     },
     // The following IRI redirects the user to PodBrowser so that they can approve/deny the request.
-    fallbackAccessManagementUi: `https://podbrowser.inrupt.com/privacy/consent/requests/`,
+    fallbackAccessManagementUi: `https://podbrowser.inrupt.com/privacy/access/requests/`,
     // Note: the following is only necessary because this projects depends for testing purpose
     // on solid-client-authn-browser, which is picked up automatically for convenience in
     // browser-side apps. A typical node app would not have this dependence.
