@@ -20,6 +20,7 @@
  */
 
 /* eslint-disable no-console */
+
 if (typeof btoa === "undefined") {
   global.btoa = function (str) {
     return Buffer.from(str, "binary").toString("base64");
@@ -32,6 +33,7 @@ if (typeof atob === "undefined") {
   };
 }
 
+const path = require('path');
 const { Session } = require("@inrupt/solid-client-authn-node");
 const { config } = require("dotenv-flow");
 const { fetch: crossFetch } = require("cross-fetch");
@@ -47,7 +49,11 @@ const {
 config();
 
 const app = express();
+
 app.set("view engine", "ejs");
+
+app.set('views', path.join(__dirname, 'views'));
+
 // Support parsing application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 

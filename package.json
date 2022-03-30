@@ -4,7 +4,7 @@
     "description": "Demo app for access grants flow",
     "main": "server.js",
     "scripts": {
-        "start": "node server.js"
+        "start": "node index.js"
     },
     "dependencies": {
         "@inrupt/solid-client-access-grants": "^0.4.1",
@@ -15,7 +15,7 @@
         "express": "^4.17.3"
     },
     "engines": {
-        "node": "12.x"
+        "node": "14.x"
     },
     "repository": {
         "url": "https://github.com/inrupt/test-app-access-grants/"
