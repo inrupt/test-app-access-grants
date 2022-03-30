@@ -20,8 +20,6 @@
  */
 
 /* eslint-disable no-console */
-global.Buffer = global.Buffer || require("buffer").Buffer;
-
 if (typeof btoa === "undefined") {
   global.btoa = function (str) {
     return Buffer.from(str, "binary").toString("base64");
