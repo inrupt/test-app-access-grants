@@ -122,7 +122,7 @@ app.get("/redirect", async (req, res) => {
   });
   const fileContent = await file.text();
 
-  res.render("success", { fullVc: JSON.stringify(fullVc), fileContent });
+  res.render("success", { fullVc: JSON.stringify(fullVc, null, 2), fileContent });
 });
 
 app.listen(process.env.PORT, async () => {
