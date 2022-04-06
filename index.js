@@ -33,7 +33,7 @@ if (typeof atob === "undefined") {
   };
 }
 
-const path = require('path');
+const path = require("path");
 const { Session } = require("@inrupt/solid-client-authn-node");
 const { config } = require("dotenv-flow");
 const { fetch: crossFetch } = require("cross-fetch");
@@ -52,7 +52,7 @@ const app = express();
 
 app.set("view engine", "ejs");
 
-app.set('views', path.join(__dirname, 'views'));
+app.set("views", path.join(__dirname, "views"));
 
 // Support parsing application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
@@ -117,12 +117,24 @@ app.get("/redirect", async (req, res) => {
   const decodedAccessGrant = fullVc;
   const targetResource =
     decodedAccessGrant.credentialSubject.providedConsent.forPersonalData[0];
-  const file = await getFile(targetResource, decodedAccessGrant, {
-    fetch: session.fetch,
-  });
-  const fileContent = await file.text();
-
-  res.render("success", { fullVc: JSON.stringify(fullVc, null, 2), fileContent });
+  let fileContent;
+  try {
+    const file = await getFile(targetResource, decodedAccessGrant, {
+      fetch: session.fetch,
+    });
+    fileContent = await file.text();
+  } catch (e) {
+    // ignoring the error since it is expected that fetching fails for a
+    // resource with a denied access grant - in the future we want to provide
+    // feedback to users when errors are due to other reasons
+    console.log(e)
+  } finally {
+    res.render("success", {
+      fullVc: JSON.stringify(fullVc, null, 2),
+      fileContent,
+      resourceUrl: targetResource
+    });
+  }
 });
 
 app.listen(process.env.PORT, async () => {

@@ -6,7 +6,12 @@
   <p>Redirected with access grant:</p>
   <pre style="white-space: pre-wrap"><%- fullVc %></pre>
   <hr />
-  <p>Fetched file content:</p>
-  <pre style="white-space: pre-wrap"><%- fileContent %></pre>
-  <div></div>
+  <% if(fileContent){ %>
+    <p>Fetched file content:</p>
+    <pre style="white-space: pre-wrap"><%- fileContent %></pre>
+    <div></div>
+  <% } else{ %>  
+    <p>Access to <%- resourceUrl %> denied</p>
+ <% } %>
+
 </div>
