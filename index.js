@@ -43,6 +43,7 @@ const {
   redirectToAccessManagementUi,
   getFile,
   getAccessGrant,
+  GRANT_VC_URL_PARAM_NAME,
 } = require("@inrupt/solid-client-access-grants");
 
 // Load env variables
@@ -110,8 +111,8 @@ app.get("/redirect", async (req, res) => {
     // Note that using a Bearer token is mandatory for the UMA access token to be valid.
     tokenType: "Bearer",
   });
-  const { signedVcUrl } = req.query;
-  const fullVc = await getAccessGrant(signedVcUrl, {
+  const accessGrantUrl = req.query[GRANT_VC_URL_PARAM_NAME];
+  const fullVc = await getAccessGrant(accessGrantUrl, {
     fetch: session.fetch,
   });
   const decodedAccessGrant = fullVc;
@@ -127,7 +128,7 @@ app.get("/redirect", async (req, res) => {
     // ignoring the error since it is expected that fetching fails for a
     // resource with a denied access grant - in the future we want to provide
     // feedback to users when errors are due to other reasons
-    console.log(e)
+    console.log(e);
   } finally {
     res.render("success", {
       fullVc: JSON.stringify(fullVc, null, 2),
