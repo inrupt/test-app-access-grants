@@ -78,7 +78,10 @@ app.post("/request", async (req, res) => {
   const accessRequest = await issueAccessRequest(
     {
       access: { read: true },
-      purpose: ["https://some.purpose", "https://some.other.purpose"],
+      purpose: [
+        "https://w3c.github.io/dpv/dpv/#UserInterfacePersonalisation",
+        "https://w3c.github.io/dpv/dpv/#OptimiseUserInterface",
+      ],
       requestor: session.info.webId,
       resourceOwner: req.body.owner,
       resources: [req.body.resource],
@@ -133,7 +136,7 @@ app.get("/redirect", async (req, res) => {
     res.render("success", {
       fullVc: JSON.stringify(fullVc, null, 2),
       fileContent,
-      resourceUrl: targetResource
+      resourceUrl: targetResource,
     });
   }
 });
